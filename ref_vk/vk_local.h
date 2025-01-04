@@ -290,7 +290,7 @@ void	Vk_ImageList_f (void);
 void	Vk_InitImages (void);
 void	Vk_ShutdownImages (void);
 void	Vk_FreeUnusedImages (void);
-void	Vk_DrawParticles( int n, const particle_t particles[], const unsigned colortable[768] );
+void	Vk_DrawParticles( int n, const particle_t particles[], const unsigned *colortable );
 
 void Mat_Identity(float *matrix);
 void Mat_Mul(float *m1, float *m2, float *res);
@@ -329,6 +329,7 @@ typedef struct
 	qboolean    vk_khr_portability_subset_available;  // this extension must be enabled according to the specs if the device supports it
 	qboolean    vk_khr_get_physical_device_properties2_available; // required by VK_KHR_portability_subset and VK_EXT_full_screen_exclusive
 	qboolean    vk_khr_get_surface_capabilities2_available; // required by VK_EXT_full_screen_exclusive
+	qboolean    vk_khr_portability_enumeration_available; // required by MoltenVK
 	qboolean    vk_ext_debug_utils_supported;
 	qboolean    vk_ext_debug_report_supported;
 	qboolean    vk_ext_full_screen_exclusive_available; // the extension is available

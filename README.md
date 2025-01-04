@@ -1,9 +1,9 @@
 <p align="center"><img src="vkQuake2.png"></p>
 
 ### Build status
-[![Build Status](https://img.shields.io/appveyor/build/kondrak/vkQuake2?logo=appveyor)](https://ci.appveyor.com/project/kondrak/vkquake2)
-[![Build Status](https://img.shields.io/travis/kondrak/vkQuake2?logo=travis)](https://travis-ci.org/kondrak/vkQuake2)
-[![Build Status](https://img.shields.io/github/workflow/status/kondrak/vkQuake2/CI?logo=github)](https://github.com/kondrak/vkQuake2/actions?query=workflow%3ACI)
+[![Linux](https://github.com/kondrak/vkQuake2/actions/workflows/linux.yml/badge.svg)](https://github.com/kondrak/vkQuake2/actions/workflows/linux.yml)
+[![MacOS](https://github.com/kondrak/vkQuake2/actions/workflows/macos.yml/badge.svg)](https://github.com/kondrak/vkQuake2/actions/workflows/macos.yml)
+[![Windows](https://github.com/kondrak/vkQuake2/actions/workflows/windows.yml/badge.svg)](https://github.com/kondrak/vkQuake2/actions/workflows/windows.yml)
 
 Overview
 ===
@@ -37,7 +37,7 @@ For extra challenge I decided to base vkQuake2 on the original id Software code.
 
 ## Windows
 - download and install the latest [Vulkan SDK](https://vulkan.lunarg.com/)
-- install [Visual Studio Community 2019](https://www.visualstudio.com/products/free-developer-offers-vs) with C++ MFC for build tools and Windows 10 SDK
+- install [Visual Studio Community 2022](https://www.visualstudio.com/products/free-developer-offers-vs) with the latest Windows SDK and C++ MFC for build tools
 - open `quake2.sln` and choose the target architecture (x86/x64) - it should build without any additional steps
 
 ## Linux
@@ -48,7 +48,7 @@ sudo apt install make gcc g++ mesa-common-dev libglu1-mesa-dev libxxf86dga-dev l
 ```
 - Install the latest [Vulkan SDK](https://vulkan.lunarg.com/) - the easiest way is to use [LunarG Ubuntu Packages](https://vulkan.lunarg.com/sdk/home#linux) - just follow the instructions and there will be no additional steps required. If you decide for a manual installation, make sure that proper environment variables are set afterwards by adding the following section to your `.bashrc` file (replace SDK version and location with the ones corresponding to your system):
 ```
-export VULKAN_SDK=/home/user/VulkanSDK/1.2.170.0/x86_64
+export VULKAN_SDK=/home/user/VulkanSDK/1.3.224.1/x86_64
 export PATH=$VULKAN_SDK/bin:$PATH
 export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
 export VK_LAYER_PATH=$VULKAN_SDK/etc/explicit_layer.d
@@ -65,9 +65,9 @@ sudo apt install mesa-vulkan-drivers
 - open `macos/vkQuake2.xcworkspace` - it should build without any additional steps
 - alternatively, you can compile the game from the command line - modify your `.bash_profile` and add the following entries (replace SDK version and location with the ones corresponding to your system):
 ```
-export VULKAN_SDK=/home/user/VulkanSDK/1.2.170.0
-export VK_ICD_FILENAMES=$VULKAN_SDK/macOS/share/vulkan/icd.d/MoltenVK_icd.json
-export VK_LAYER_PATH=$VULKAN_SDK/macOS/share/vulkan/explicit_layer.d
+export VULKAN_SDK=/home/user/VulkanSDK/1.3.224.1
+export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
+export VK_LAYER_PATH=$VULKAN_SDK/share/vulkan/explicit_layer.d
 ```
 - enter the `macos` directory and run `make release-xcode` or `make debug-xcode` depending on which variant you want to build - output binaries will be placed in `macos/vkQuake2` subdirectory
 - it is also possible to build the game with Command Line Developer Tools if you have them installed: enter the `macos` directory and run `make release` or `make debug` - output binaries will be placed in `macos/release` and `macos/debug` subdirectories respectively
@@ -157,5 +157,5 @@ See also
 
 Known Issues
 ===
-- some Intel GPUs may ignore texture filtering settings in video menu if anisotropic filtering is enabled - this is in fact not an issue but rather a result of anisotropic texture filtering being implementation-dependent
+- some Intel GPUs may ignore texture filtering settings in video menu if anisotropic filtering is enabled - this is the result of anisotropic texture filtering being implementation-dependent
 - macOS using Vulkan SDK 1.2.162 or higher: the application may hang on some MacBooks if `vk_sampleshading` is enabled due to a potential bug in the Metal driver causing a deadlock during shader compilation
